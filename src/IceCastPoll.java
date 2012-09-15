@@ -25,6 +25,7 @@ public class IceCastPoll extends TimerTask {
 
     private RadioBot bot;
     private String channel = "#programming";
+    private boolean radioStatus = false;
 
     public IceCastPoll(RadioBot radioBot) {
         this.bot = radioBot;
@@ -39,9 +40,9 @@ public class IceCastPoll extends TimerTask {
         for (Stream stream : streams) {
 
             if (stream.getTitle() == "radio7"){
-                this.bot.sendMessage(channel, "Current Song is " + stream.getCurrentSong());
+                radioStatus = true;
             } else {
-                this.bot.sendMessage(channel, "THE RADIO IS OFF KTHX");
+                radioStatus = false;
 
             }
 
