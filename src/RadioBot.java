@@ -10,6 +10,7 @@ import org.jibble.pircbot.*;
 import java.util.Timer;
 
 public class RadioBot extends PircBot {
+    public String currentTopic = "OFF-AIR || http://radio.7chan.org:8000/radio.m3u";
 
     public RadioBot() {
         this.setName("radiobot");
@@ -18,5 +19,12 @@ public class RadioBot extends PircBot {
 
     }
 
+    @Override
+    protected void onChannelInfo (String channel, int userCount, String topic) {
+        super.onChannelInfo(channel, userCount, topic);
 
+        if (channel == "#cart") {
+            currentTopic = topic;
+        }
+    }
 }
