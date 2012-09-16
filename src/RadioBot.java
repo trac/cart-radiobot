@@ -23,7 +23,7 @@ public class RadioBot extends PircBot {
     protected void onChannelInfo (String channel, int userCount, String topic) {
         super.onChannelInfo(channel, userCount, topic);
 
-        if (channel == "#cart") {
+        if (channel == "#7chan") {
             currentTopic = topic;
         }
     }

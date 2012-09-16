@@ -22,18 +22,9 @@ import net.moraleboost.streamscraper.scraper.IceCastScraper;
 public class IceCastPoll extends TimerTask {
 
     private RadioBot bot;
-    private String channel = "#cart";
-    private boolean radioStatus = false;
-    private boolean topicChanged = false;
-    private String title = "";
-    private String currentSong = "";
-    private String pastSong = "";
-    private String description = "";
-    private String bitRate = "";
-    private String contentType = "";
-    private String genre = "";
-    private int currentListeners = 0;
-    private int peakListeners = 0;
+    private String channel = "#7chan";
+
+
 
     public IceCastPoll(RadioBot radioBot) {
         this.bot = radioBot;
@@ -48,18 +39,7 @@ public class IceCastPoll extends TimerTask {
             for (Stream stream : streams) {
 
                 if (stream.getTitle() == "radio7") {
-                    radioStatus = true;
-                    title = stream.getTitle();
-                    pastSong = song;
-                    song = stream.getCurrentSong();
-                    description = stream.getDescription();
-                    currentListeners = stream.getCurrentListenerCount();
-                    peakListeners = stream.getPeakListenerCount();
-                    bitRate = stream.getBitRate();
-                    contentType = stream.getContentType();
-                    genre = stream.getGenre();
-                } else {
-                    radioStatus = false;
+
                 }
             }
 
@@ -70,10 +50,10 @@ public class IceCastPoll extends TimerTask {
 
             System.out.println(e.getMessage());
         }
-
-        if (radioStatus == true) {
+/*
+        if (radioStream != null) {
             if (topicChanged = false) {
-                bot.setTopic(channel, description + " is playing " + genre + ". Listen via http://radio.7chan.org:8000/radio.m3u");
+                bot.setTopic(channel, stream + " is playing " + genre + ". Listen via http://radio.7chan.org:8000/radio.m3u");
                 topicChanged = true;
             }
             if (pastSong != song) {
@@ -86,6 +66,7 @@ public class IceCastPoll extends TimerTask {
             }
 
         }
+        */
     }
 
 
