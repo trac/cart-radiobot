@@ -24,7 +24,7 @@ public class IceCastPoll extends TimerTask {
     private RadioBot bot;
     private String channel = "#7chan";
 
-
+    private Stream radioStream;
 
     public IceCastPoll(RadioBot radioBot) {
         this.bot = radioBot;
@@ -33,13 +33,15 @@ public class IceCastPoll extends TimerTask {
     public void run() {
         Scraper scraper = new IceCastScraper();
         String song = "";
+        radioStream = null;
         try {
             List<Stream> streams = scraper.scrape(new URI("http://radio.7chan.org:8000/"));
 
             for (Stream stream : streams) {
 
                 if (stream.getTitle() == "radio7") {
-
+                    radioStream = stream;
+                    break;
                 }
             }
 
