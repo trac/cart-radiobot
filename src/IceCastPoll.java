@@ -22,7 +22,7 @@ import net.moraleboost.streamscraper.scraper.IceCastScraper;
 public class IceCastPoll extends TimerTask {
 
     private RadioBot bot;
-    private String channel = "#7chan";
+    private String channel = "#programming";
 
     private Stream radioStream;
 
@@ -52,23 +52,13 @@ public class IceCastPoll extends TimerTask {
 
             System.out.println(e.getMessage());
         }
-/*
-        if (radioStream != null) {
-            if (topicChanged = false) {
-                bot.setTopic(channel, stream + " is playing " + genre + ". Listen via http://radio.7chan.org:8000/radio.m3u");
-                topicChanged = true;
-            }
-            if (pastSong != song) {
-                bot.sendMessage(channel, song + ", " + currentListeners + "/" + peakListeners);
-            }
-        } else {
-            bot.listChannels(channel);
-            if (bot.currentTopic != "OFF-AIR || http://radio.7chan.org:8000/radio.m3u") {
-                bot.setTopic(channel, "OFF-AIR || http://radio.7chan.org:8000/radio.m3u");
-            }
 
+        if (radioStream != null) {
+           bot.sendMessage(channel, "Now Playing: " + radioStream.getCurrentSong());
+        } else {
+           bot.sendMessage(channel, "The Radio is off-air");
         }
-        */
+
     }
 
 

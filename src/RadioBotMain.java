@@ -31,7 +31,7 @@ public class RadioBotMain {
         bot.connect("irc.7chan.su");
 
         // Join the #pircbot channel.
-        bot.joinChannel("#7chan");
+        bot.joinChannel("#programming");
 
         //bot.sendMessage("#programming", getSong());
 
