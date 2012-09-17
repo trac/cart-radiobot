@@ -15,7 +15,7 @@ public class RadioBot extends PircBot {
     public RadioBot() {
         this.setName("radiobot");
 
-        new Timer().schedule(new IceCastPoll(this),0, 30 * 1000);
+        new Timer().schedule(new IceCastPoll(this),10 * 1000, 30 * 1000);
 
     }
 
@@ -23,7 +23,7 @@ public class RadioBot extends PircBot {
     protected void onChannelInfo (String channel, int userCount, String topic) {
         super.onChannelInfo(channel, userCount, topic);
 
-        if (channel == "#programming") {
+        if (channel == "#cart") {
             currentTopic = topic;
         }
     }

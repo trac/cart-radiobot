@@ -22,7 +22,10 @@ import net.moraleboost.streamscraper.scraper.IceCastScraper;
 public class IceCastPoll extends TimerTask {
 
     private RadioBot bot;
-    private String channel = "#programming";
+    private String channel = "#radio";
+    public String previousSong = "";
+    public String previousDJ = "";
+    public boolean radioToggle = false;
 
     private Stream radioStream;
 
@@ -32,14 +35,14 @@ public class IceCastPoll extends TimerTask {
 
     public void run() {
         Scraper scraper = new IceCastScraper();
-        String song = "";
         radioStream = null;
+
         try {
             List<Stream> streams = scraper.scrape(new URI("http://radio.7chan.org:8000/"));
 
             for (Stream stream : streams) {
 
-                if (stream.getTitle() == "radio7") {
+                if (stream.getTitle().equalsIgnoreCase("radio7")) {
                     radioStream = stream;
                     break;
                 }
@@ -54,9 +57,21 @@ public class IceCastPoll extends TimerTask {
         }
 
         if (radioStream != null) {
-           bot.sendMessage(channel, "Now Playing: " + radioStream.getCurrentSong());
+            radioToggle = true;
+            if (!previousDJ.equalsIgnoreCase(radioStream.getDescription())) {
+                previousDJ = radioStream.getDescription();
+                bot.setTopic(channel, radioStream.getDescription() + " || http://radio.7chan.org:8000/radio.m3u");
+            }
+            if (!previousSong.equalsIgnoreCase(radioStream.getCurrentSong())) {
+                previousSong = radioStream.getCurrentSong();
+                bot.sendMessage(channel, radioStream.getCurrentSong() + ", " + radioStream.getCurrentListenerCount() + "/" + radioStream.getPeakListenerCount());
+            }
         } else {
-           bot.sendMessage(channel, "The Radio is off-air");
+            if (radioToggle == true && !previousDJ.equalsIgnoreCase("")) {
+                previousDJ = "";
+                radioToggle = false;
+                bot.setTopic(channel, "OFF-AIR || http://radio.7chan.org:8000/radio.m3u");
+            }
         }
 
     }
