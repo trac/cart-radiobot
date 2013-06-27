@@ -33,10 +33,10 @@ public class RadioBotMain {
         // Join the #pircbot channel.
         bot.joinChannel("#radio");
 
-        //bot.sendMessage("#programming", getSong());
+        bot.sendMessage("#radio", getSong());
 
     }
-/*
+
     static String getSong() throws Exception {
 
         String song = "";
@@ -51,5 +51,5 @@ public class RadioBotMain {
 
         return song;
     }
-*/
+
 }
